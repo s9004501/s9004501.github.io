@@ -26,7 +26,7 @@ async function recognizeFaces(){
     console.log(labeledDescriptors)
     const faceMatcher = new faceapi.FaceMatcher(labeledDescriptors,0.7)
 
-    //video.addEventListener('play', async() => {
+    video.addEventListener('play', async() => {
         console.log("Playing")
         const canvas = faceapi.createCanvasFromMedia(video)
         document.body.append(canvas)
@@ -47,7 +47,7 @@ async function recognizeFaces(){
                 drawBox.draw(canvas)
             })
     },100)
-//})
+})
 }
 
 function loadLabel(){
