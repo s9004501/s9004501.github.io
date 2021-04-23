@@ -1,4 +1,4 @@
-const video = document.getElementById('inputVideo')
+const video1 = document.getElementById('inputVideo')
 
 // 先讀取完模型再開啟攝影機
 Promise.all([
@@ -9,15 +9,27 @@ Promise.all([
   
 // 開啟攝影機
 function startVideo() {
-    // 取得權限
-    navigator.mediaDevices.getUserMedia(
-      { video: {} },
-      stream => video.srcObject = stream,
-      err => console.error(err)
-    )
+    if(hasGetUserMedia()){
+        // 取得攝影機權限
+        navigator.mediaDevices.getUserMedia({ video: {} })
+        .then(function(stream){
+            // 將攝影機分配給 video1
+            video1.srcObject = stream;
+        })
+        .catch(function(err){
+            console.log("not support")
+        })
 
-    console.log("have picture")
+    }
+    else{
+        console.log("not support")
+    }
     recognizeFaces()
+  }
+
+// 確認鏡頭是否可用
+function hasGetUserMedia() {
+    return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   }
 
 async function recognizeFaces(){
@@ -25,17 +37,18 @@ async function recognizeFaces(){
     // 描述標籤
     console.log(labeledDescriptors)
     const faceMatcher = new faceapi.FaceMatcher(labeledDescriptors,0.7)
-
-    video.addEventListener('playing', async() => {
         console.log("Playing")
-        const canvas = faceapi.createCanvasFromMedia(video)
+        const canvas =  faceapi.createCanvasFromMedia(video1)
         document.body.append(canvas)
 
-        const displaySize = { width: video.width, height: video.height }
+        console.log(video1.offsetWidth)
+        console.log(video1.offsetHeight)
+
+        const displaySize = { width: video1.offsetWidth, height: video1.offsetHeight}
         faceapi.matchDimensions(canvas, displaySize)
 
         setInterval(async () => {
-            const detections = await faceapi.detectAllFaces(video).withFaceLandmarks().withFaceDescriptors()
+            const detections = await faceapi.detectAllFaces(video1).withFaceLandmarks().withFaceDescriptors()
             const resizedDetections = faceapi.resizeResults(detections, displaySize)
             canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
             const results = resizedDetections.map((d) => {
@@ -46,8 +59,7 @@ async function recognizeFaces(){
                 const drawBox = new faceapi.draw.DrawBox(box, { label: result.toString() })
                 drawBox.draw(canvas)
             })
-    },100)
-})
+        },100)
 }
 
 function loadLabel(){
