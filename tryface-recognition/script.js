@@ -10,7 +10,7 @@ Promise.all([
 // 開啟攝影機
 function startVideo() {
     // 取得權限
-    navigator.getUserMedia(
+    navigator.mediaDevices.getUserMedia(
       { video: {} },
       stream => video.srcObject = stream,
       err => console.error(err)
