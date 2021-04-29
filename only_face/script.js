@@ -1,4 +1,5 @@
 const video1 = document.getElementById('inputVideo')
+const inputtext = document.getElementById('inputtext')
 
 // 先讀取完模型再開啟攝影機
 Promise.all([
@@ -6,6 +7,7 @@ Promise.all([
     faceapi.nets.ageGenderNet.loadFromUri('/models'),         // 年紀性別
     console.log("load models OK")
   ]).then(startVideo)
+
 
 /*
 const stream = navigator.mediaDevices.getUserMedia({video: {}},)
@@ -101,7 +103,7 @@ function recognizeFaces(){
         if(start-end >=2000){
            console.log("send to adafruit")
             $.ajax({
-                url: "https://io.adafruit.com/api/v2/FM623test/feeds/step/data?X-AIO-Key=aio_vVaP04cL7Y3dm82TpcI2Asrl3Qoi",
+                url: "https://io.adafruit.com/api/v2/FM623test/feeds/step/data?X-AIO-Key="+inputtext.value,
                 type: "POST",
                 data: {
                   "value":parseInt(age)
@@ -126,6 +128,7 @@ function recognizeFaces(){
         })
     }, 100)
 }
+
 
 // 取得元素位置
 function getPosition (element) {
