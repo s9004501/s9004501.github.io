@@ -101,7 +101,7 @@ function recognizeFaces(){
         if(start-end >=2000){
            console.log("send to adafruit")
             $.ajax({
-                url: "https://io.adafruit.com/api/v2/FM623test/feeds/step/data?X-AIO-Key=aio_UJfT65j0r9BROoBDCVy7ryu3D3Bs",
+                url: "https://io.adafruit.com/api/v2/FM623test/feeds/step/data?X-AIO-Key=aio_irED928HyYeRi2UAz4MgfSxdgXuj",
                 type: "POST",
                 data: {
                   "value":parseInt(age)
