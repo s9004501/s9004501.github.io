@@ -33,7 +33,7 @@ async function startVideo(){
       video1.srcObject = stream;
     })
     await video1.play();
-    //recognizeFaces()
+    recognizeFaces()
   }
 
 
