@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css" rel="stylesheet">
+  <style>
+    /* justify-content：x軸   align-items：y軸    flex-direction：排列方式*/
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;       
+      height: 100vh;      
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-family: "微軟正黑體", "黑體-繁", sans-serif;
+      font-size: 40px;
+      background :darkgrey;
+    }
+    
+    canvas {
+      position: absolute;
+    }
+
+    #inputtext{
+      font-size: 40px;
+      height: 2em;
+    }
+
+    #mask{
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      background: rgba(0, 0, 0, 0.9);
+      position:absolute;
+      display:none;
+    }
+    #loadImg{
+      position:absolute;
+      display:none;
+    }
+
+  </style>
+</head>
+
+<body>
+  <!--   -->
+  <div id="mask"></div>
+  <img  id="loadImg"src="https://s9004501.github.io/load_model2.gif">
+  <p id="outputtext"></p>
+  <video id="inputVideo"  autoplay muted></video>
+  <br>
+  <input id="inputtext" type="text" name="欄位名稱">
+</body>
+
+<script defer  src="face-api.min.js"></script>
+<script defer  src="script.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+</html>
