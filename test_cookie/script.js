@@ -101,6 +101,7 @@ function recognizeFaces(){
     canvas.style.left = getPosition(video1)["x"] + "px";
     canvas.style.top = getPosition(video1)["y"] + "px";
     //const displaySize = { width: video1.offsetWidth, height: video1.offsetHeight }
+    /*
     if(video1.offsetHeight >= video1.offsetWidth/1.337){
       // 小視窗
       displaySize = { width: video1.offsetWidth, height: video1.offsetWidth/1.337 }
@@ -109,10 +110,13 @@ function recognizeFaces(){
       // 大視窗
       displaySize = { width: video1.offsetHeight*1.337, height: video1.offsetHeight }
     }
+    */
+    displaySize = { width: video1.offsetWidth, height: video1.offsetHeight }
     faceapi.matchDimensions(canvas, displaySize)
     //outputtext.innerHTML = "等待模型中"
     setInterval(async () => {
     console.log(video1.offsetWidth, video1.offsetHeight)
+    /*
     if(video1.offsetHeight >= video1.offsetWidth/1.337){
       // console.log("small")  小視窗
       displaySize = { width: video1.offsetWidth, height: video1.offsetWidth/1.337 }
@@ -121,6 +125,8 @@ function recognizeFaces(){
       // console.log("big")  大視窗
       displaySize = { width: video1.offsetHeight*1.337, height: video1.offsetHeight }
     }
+    */
+    displaySize = { width: video1.offsetWidth, height: video1.offsetHeight }
     faceapi.matchDimensions(canvas, displaySize)
       // 年紀性別
     const detections = await faceapi.detectAllFaces(video1, new faceapi.TinyFaceDetectorOptions()).withAgeAndGender()          
@@ -158,6 +164,7 @@ function recognizeFaces(){
     var dis_x = (video1.offsetWidth-video1.offsetHeight*1.337)/2
 
     resizedDetections.forEach(detection => {
+      /*
       if(video1.offsetHeight >= video1.offsetWidth/1.337){
         //console.log("small")  小視窗
         canvas.style.left = getPosition(video1)["x"] + "px";
@@ -168,6 +175,9 @@ function recognizeFaces(){
         canvas.style.left = getPosition(video1)["x"] + dis_x + "px";
         canvas.style.top = getPosition(video1)["y"] + "px";
       }
+      */
+        canvas.style.left = getPosition(video1)["x"] + "px";
+        canvas.style.top = getPosition(video1)["y"] + "px";
         const { age, gender, genderProbability } = detection
         new faceapi.draw.DrawTextField([
             `${parseInt(age, 10)} years`,
