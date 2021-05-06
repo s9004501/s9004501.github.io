@@ -91,11 +91,8 @@ async function canRecognizeFaces(sta){
 
         results.forEach((result,i) =>{
             console.log(results[i]["label"])     // 顯示所有偵測到的名稱
-            sendMsg(results[i]["label"])
-            //canvas.style.left = getPosition(video1)["x"] + "px";
-            //canvas.style.top = getPosition(video1)["y"] + "px";
+            sendMsg(results[i]["label"]+":"+results[i]["distance"])
             const box = resizedDetections[i].detection.box
-            //const drawBox = new faceapi.draw.DrawBox(box, { label: result.toString() })
             const drawBox = new faceapi.draw.DrawBox(box, { label: result })
             drawBox.draw(canvas)
         })
@@ -220,7 +217,7 @@ async function sendMsg(msg) {
             const uartChar = await UARTService.getCharacteristic(RX_UUID);
             let enc = new TextEncoder();
             uartChar.writeValue(
-                enc.encode(msg)
+                enc.encode(msg),
             )
         } catch (err) {
             console.log('出錯啦～' + err);
